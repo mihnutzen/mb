@@ -1,0 +1,147 @@
+.fog-letters {
+    .title {
+        span {
+            color: rgba(255,255,255,0);
+            text-shadow: 10px 10px 50px rgba(255,255,255,0.4),
+                        -10px -10px 50px rgba(255,255,255,0.4);
+
+            transition: all .3s ease-in;
+
+            &:hover {
+                color: rgba(255,255,255,1);
+                text-shadow: 0px 0px 0px rgba(255,255,255,0),
+                            0px 0px 0px rgba(255,255,255,0);
+            }
+        }
+    }
+
+    .main-title {
+        @for $i from 1 through 13 {
+            span[class^="char"]:nth-child(#{$i}) {
+                animation: clearLetter (usw_random() + 1s) ease-in forwards ($i * 0.1s + (usw_random() + 0.5s));
+                -webkit-animation: clearLetter (usw_random() + 1s) ease-in forwards ($i * 0.1s + (usw_random() + 0.5s));
+            }
+
+        }
+    }
+
+    .job-title {
+        @for $i from 1 through 9 {
+            span[class^="char"]:nth-child(#{$i}) {
+                animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 2.5s);
+                -webkit-animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 6.5s);
+            }
+
+        }
+    }
+}
+
+
+@keyframes clearLetter {
+    0% {
+        color: rgba(255,255,255,0);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0.4),
+                    -3px -3px 30px rgba(255,255,255,0.4);
+    }
+
+    30% {
+        color: rgba(255,255,255,1);
+        // color: pink;
+        text-shadow: 0px 0px 0px rgba(255,255,255,0),
+                    0px 0px 0px rgba(255,255,255,0);
+    }
+
+    40% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0.5),
+                    -3px -3px 30px rgba(255,255,255,0.5);
+    }
+
+    100% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0),
+                    -3px -3px 30px rgba(255,255,255,0);
+    }
+}
+
+
+@keyframes fitLetter {
+    0% {
+        color: rgba(255,255,255,0);
+        // color: red;
+        text-shadow: 3px 3px 50px rgba(255,255,255,0.6),
+                    -3px -3px 30px rgba(255,255,255,0.8);
+    }
+
+    75% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 50px rgba(255,255,255,0.6),
+                    -3px -3px 40px rgba(255,255,255,0.8);
+    }
+
+    100% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 3px rgba(255,255,255,0),
+                    -3px -3px 3px rgba(255,255,255,0);
+    }
+}
+
+
+@-webkit-keyframes clearLetter {
+    0% {
+        color: rgba(255,255,255,0);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0.4),
+                    -3px -3px 30px rgba(255,255,255,0.4);
+    }
+
+    30% {
+        color: rgba(255,255,255,1);
+        // color: pink;
+        text-shadow: 0px 0px 0px rgba(255,255,255,0),
+                    0px 0px 0px rgba(255,255,255,0);
+    }
+
+    40% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0.5),
+                    -3px -3px 30px rgba(255,255,255,0.5);
+    }
+
+    100% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 30px rgba(255,255,255,0),
+                    -3px -3px 30px rgba(255,255,255,0);
+    }
+}
+
+
+@-webkit-keyframes fitLetter {
+    0% {
+        color: rgba(255,255,255,0);
+        // color: red;
+        text-shadow: 3px 3px 50px rgba(255,255,255,0.6),
+                    -3px -3px 30px rgba(255,255,255,0.8);
+    }
+
+    75% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 50px rgba(255,255,255,0.6),
+                    -3px -3px 40px rgba(255,255,255,0.8);
+    }
+
+    100% {
+        color: rgba(255,255,255,1);
+        // color: red;
+        text-shadow: 3px 3px 3px rgba(255,255,255,0),
+                    -3px -3px 3px rgba(255,255,255,0);
+    }
+}

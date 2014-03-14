@@ -1,0 +1,78 @@
+.piano-colors {
+    // position: relative;
+
+    .main-title {
+
+        span {
+
+            &.char1, &.char8 {
+                border-radius: $spacing/4;
+                padding: 0 $spacing/2;
+            }
+
+            &.char1 {
+                background: $color1;
+            }
+
+            &.char8 {
+                background-color: $color4;
+            }
+        }
+    }
+
+    .job-title {
+
+        span {
+            margin-left: -$spacing;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8),
+                        -1px -1px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+            cursor: default;
+
+            transition: all .3s ease-out;
+        }
+
+        br + strong {
+            position: relative;
+            top: -$spacing*1.5;
+        }
+
+        @for $i from 1 through 9 {
+
+            span[class^="char"]:nth-child(#{$i}) {
+                @if $i % 2 == 1 {
+                    z-index: 1;
+                    top: -$spacing/2;
+                }
+                color: nth($colors, $i);
+
+                &:hover {
+                    color: lighten(nth($colors, $i), $lighten-perc);
+                    text-shadow: 3px 0px 5px nth($colors, $i),
+                                -3px 0px 5px nth($colors, $i),
+                                0px 3px 5px nth($colors, $i),
+                                0px -3px 5px nth($colors, $i);
+                }
+
+            }
+        }
+
+        @for $i from 1 through 3 {
+            strong:first-child span:nth-child(#{$i}) {
+                @if $i % 2 == 1 {
+
+                }
+                color: nth($colors, $i % 5 + 1);
+
+                &:hover {
+                    color: lighten(nth($colors, $i % 5 + 1), $lighten-perc);
+                    text-shadow: 3px 0px 5px nth($colors, $i % 5 + 1),
+                                -3px 0px 5px nth($colors, $i % 5 + 1),
+                                0px 3px 5px nth($colors, $i % 5 + 1),
+                                0px -3px 5px nth($colors, $i % 5 + 1);
+                }
+
+            }
+        }
+    }
+}
