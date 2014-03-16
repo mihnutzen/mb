@@ -11,18 +11,18 @@
 
         console.log('randomTheme', randomTheme, randomNr);
 
-        // $('body').addClass(randomTheme);
+        $('body').addClass(randomTheme);
 
         if (randomTheme === 'piano-colors') {
             initPianoSounds($('.job-title span'));
         }
 
-        // if (randomTheme === 'panel-letters') {
-        //     initPanels();
-        // }
+        if (randomTheme === 'panel-letters') {
+            initPanels();
+        }
 
-        $('body').addClass('panel-letters');
-        initPanels();
+        // $('body').addClass('panel-letters');
+        // initPanels();
     }
 
     function initPianoSounds(pianoKey) {

@@ -23,8 +23,9 @@ $color-panels: lighten(#ffc148, 0%);
 
             transform-style: preserve-3d;
             transform: rotateY(45deg) rotateX(45deg);
+            vertical-align: top;
 
-            transition: all 1s linear;
+            // transition: all 1s linear;
             animation: spin 2s linear;
 
             span[class^="char"] {
