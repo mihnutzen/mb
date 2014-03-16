@@ -24,15 +24,8 @@
                 // rightBottom = { 'left' :  offSetLeft + width, 'top' : offSetTop + height};
 
             var position = { 'x' : center.left - e.pageX  , 'y' : center.top - e.pageY};
-            console.log('------------------------------');
-            console.log('X: ', position.x, 'y: ', position.y);
 
-            // $this.children('.letter').css({ 'border' : '2px solid green' });
             $this.children('.letter').css({ WebkitTransform : 'rotateY('+position.x+'deg) rotateX('+(-position.y)+'deg)' });
-            // console.log('lots of shit: ', center, leftTop, leftBottom, rightTop, rightBottom, position, e.pageX);
-            // console.log('y: ', e.pageY);
-            // currentMousePos.x = event.pageX;
-            // currentMousePos.y = event.pageY;
         });
     }
 
@@ -40,18 +33,21 @@
         return { 'left' : posLeft + itemWidth/2, 'top' : posTop + itemHeight/2 };
     }
 
-    initPanels();
-
     function initTheme() {
-        var themes = ['piano-colors', 'fog-letters'],
-            randomTheme = themes[Math.floor(Math.random() * 2)];
+        var themes = ['piano-colors', 'fog-letters', 'panel-letters'],
+            randomNr = Math.floor(Math.random() * themes.length),
+            randomTheme = themes[randomNr];
 
-        console.log('randomTheme', randomTheme);
+        console.log('randomTheme', randomTheme, randomNr);
 
-        // $('body').addClass(randomTheme);
+        $('body').addClass(randomTheme);
 
         if (randomTheme === 'piano-colors') {
             initPianoSounds($('.job-title span'));
+        }
+
+        if (randomTheme === 'panel-letters') {
+            initPanels();
         }
     }
 
