@@ -29,7 +29,7 @@
         @for $i from 1 through 9 {
             span[class^="char"]:nth-child(#{$i}) {
                 animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 2.5s);
-                -webkit-animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 6.5s);
+                -webkit-animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 7.5s);
             }
 
         }

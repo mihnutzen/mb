@@ -4,35 +4,6 @@
     $('.main-title').lettering();
     $('.job-title strong').lettering();
 
-    function initPanels() {
-        $('.job-title strong span').each(function() {
-            var $this = $(this);
-
-            $this.wrap('<span class="letter-holder"><span class="letter"></span></div>').after('<span class="top-face"></span><span class="bottom-face"></span></span><span class="left-face"></span><span class="right-face"></span>');
-        });
-
-        $('.letter-holder').mousemove(function(e) {
-            var $this = $(this),
-                offSetLeft = $this.offset().left,
-                offSetTop = $this.offset().top,
-                width = $this.width(),
-                height = $this.height(),
-                center = centerPointCoors(offSetLeft, offSetTop, width, height);
-                // leftTop = { 'left' :  offSetLeft, 'top' : offSetTop},
-                // leftBottom = { 'left' :  offSetLeft, 'top' : offSetTop + height},
-                // rightTop = { 'left' :  offSetLeft + width, 'top' : offSetTop},
-                // rightBottom = { 'left' :  offSetLeft + width, 'top' : offSetTop + height};
-
-            var position = { 'x' : center.left - e.pageX  , 'y' : center.top - e.pageY};
-
-            $this.children('.letter').css({ WebkitTransform : 'rotateY('+position.x+'deg) rotateX('+(-position.y)+'deg)' });
-        });
-    }
-
-    function centerPointCoors(posLeft, posTop, itemWidth,  itemHeight) {
-        return { 'left' : posLeft + itemWidth/2, 'top' : posTop + itemHeight/2 };
-    }
-
     function initTheme() {
         var themes = ['piano-colors', 'fog-letters', 'panel-letters'],
             randomNr = Math.floor(Math.random() * themes.length),
@@ -40,15 +11,18 @@
 
         console.log('randomTheme', randomTheme, randomNr);
 
-        $('body').addClass(randomTheme);
+        // $('body').addClass(randomTheme);
 
         if (randomTheme === 'piano-colors') {
             initPianoSounds($('.job-title span'));
         }
 
-        if (randomTheme === 'panel-letters') {
-            initPanels();
-        }
+        // if (randomTheme === 'panel-letters') {
+        //     initPanels();
+        // }
+
+        $('body').addClass('panel-letters');
+        initPanels();
     }
 
     function initPianoSounds(pianoKey) {
@@ -82,6 +56,47 @@
 
             soundItems[indx].play();
         });
+    }
+
+    function initPanels() {
+        $('.job-title strong span').each(function() {
+            var $this = $(this);
+
+            $this.wrap('<span class="letter-holder"><span class="letter"></span></div>')
+                 .after('<span class="top-face"></span><span class="bottom-face"></span></span><span class="left-face"></span><span class="right-face"></span>');
+        });
+
+        $('.letter-holder').mousemove(function(e) {
+            var $this = $(this),
+                offSetLeft = $this.offset().left,
+                offSetTop = $this.offset().top,
+                width = $this.width(),
+                height = $this.height(),
+                center = centerPointCoors(offSetLeft, offSetTop, width, height);
+                // leftTop = { 'left' :  offSetLeft, 'top' : offSetTop},
+                // leftBottom = { 'left' :  offSetLeft, 'top' : offSetTop + height},
+                // rightTop = { 'left' :  offSetLeft + width, 'top' : offSetTop},
+                // rightBottom = { 'left' :  offSetLeft + width, 'top' : offSetTop + height};
+
+            var position = { 'x' : center.left - e.pageX  , 'y' : center.top - e.pageY};
+
+            $this.children('.letter').css({ 'transform' : 'rotateY('+position.x+'deg) rotateX('+(-position.y)+'deg)' });
+        });
+
+        $('.letter-holder').hover(function() {
+            var $letter = $(this).children('.letter');
+            $letter.css({'transition' : 'none'});
+        }, function() {
+            var $letter = $(this).children('.letter');
+            $letter.css({
+                'transition' : 'all 1s linear',
+                'transform' : 'rotateY(45deg) rotateX(45deg)'
+            });
+        });
+    }
+
+    function centerPointCoors(posLeft, posTop, itemWidth,  itemHeight) {
+        return { 'left' : posLeft + itemWidth/2, 'top' : posTop + itemHeight/2 };
     }
 
     initTheme();

@@ -3,13 +3,13 @@ $color-text: #fff;
 $color-panels: lighten(#ffc148, 0%);
 
 .panel-letters {
-    background-color: darken($color-bg, 10%);
-    animation: changeColors 10s linear infinite;
+    background-color: darken($color-bg, 30%);
+    // animation: changeColors 10s linear infinite;
 
     .job-title {
         .letter-holder {
             perspective: 2000px;
-            height: $spacing*3 + 4px;
+            height: $spacing*2.5 + 4px;
             padding: $spacing/2;
             overflow: hidden;
         }
@@ -24,15 +24,15 @@ $color-panels: lighten(#ffc148, 0%);
             transform-style: preserve-3d;
             transform: rotateY(45deg) rotateX(45deg);
 
-            // transition: all 0.1s linear;
-            // animation: spin 5s infinite linear;
+            transition: all 1s linear;
+            animation: spin 2s linear;
 
             span[class^="char"] {
-                font-size: $spacing*2;
-                line-height: $spacing*3;
+                font-size: $spacing*1.5;
+                line-height: $spacing*2.5;
                 vertical-align: top;
 
-                width: $spacing*3;
+                width: $spacing*2;
 
                 overflow: hidden;
                 position: relative;
@@ -135,9 +135,9 @@ $color-panels: lighten(#ffc148, 0%);
 
 @keyframes spin {
     from {
-        transform: rotateX(0) rotateY(0);
+        transform: rotateY(-45deg) rotateX(-45deg);
     }
     to {
-        transform: rotateX(-360deg) rotateY(-360deg);
+        transform: rotateY(45deg) rotateX(45deg);
     }
 }
