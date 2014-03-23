@@ -20,9 +20,6 @@
         if (randomTheme === 'panel-letters') {
             initPanels();
         }
-
-        // $('body').addClass('panel-letters');
-        // initPanels();
     }
 
     function initPianoSounds(pianoKey) {
@@ -72,7 +69,7 @@
                 offSetTop = $this.offset().top,
                 width = $this.width(),
                 height = $this.height(),
-                center = centerPointCoors(offSetLeft, offSetTop, width, height);
+                center = centerPointCoords(offSetLeft, offSetTop, width, height);
                 // leftTop = { 'left' :  offSetLeft, 'top' : offSetTop},
                 // leftBottom = { 'left' :  offSetLeft, 'top' : offSetTop + height},
                 // rightTop = { 'left' :  offSetLeft + width, 'top' : offSetTop},
@@ -95,7 +92,7 @@
         });
     }
 
-    function centerPointCoors(posLeft, posTop, itemWidth,  itemHeight) {
+    function centerPointCoords(posLeft, posTop, itemWidth,  itemHeight) {
         return { 'left' : posLeft + itemWidth/2, 'top' : posTop + itemHeight/2 };
     }
 
