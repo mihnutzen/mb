@@ -1,0 +1,768 @@
+$side: 100px;
+
+
+div[class*="holder"] {
+    width: 100%;
+    padding: $side 0;
+    display: inline-block;
+    position: relative;
+
+    border-bottom: 1px dashed #333;
+
+    text-align: center;
+
+
+    > div {
+        // border: 1px solid #FFF;
+        display: inline-block;
+        // margin: 30px;
+
+    }
+}
+
+// a plane figure with four equal straight sides and four right angles.
+// widht = height = $side
+.square {
+    width: $side;
+    height: $side;
+
+    // &:before, &:after {
+    //     display: block;
+    //     content: '';
+    //     position: absolute;
+    //     width: 1px;
+    //     height: 1px;
+    //     z-index: 1;
+    // }
+
+    // &:before {
+    //     top: 0;
+    //     left: 50%;
+    //     height: 100%;
+    //     border-left: 1px dashed #FFF;
+    //     margin-left: -1px;
+    // }
+
+    // &:after {
+    //     left: 0;
+    //     top: 50%;
+    //     width: 100%;
+    //     border-top: 1px dashed #FFF;
+    //     margin-top: 1px;
+    // }
+}
+
+.rectangle {
+    width: $side*2;
+    height: $side;
+}
+
+.rectangle2 {
+    width: $side;
+    height: $side*2;
+}
+
+// -------------------- ROMBUS -------
+.rombus45 {
+    width: $side;
+    height: $side;
+
+    transform: rotate($angle45);
+
+    &.inset {
+        transform: rotate($angle45) scale(cos($angle45));
+    }
+}
+
+
+.rombus60 {
+    width: $side;
+    height: $side;
+
+    transform: rotate($angle60) skewX($angle30) scaleY(cos($angle30));
+
+    &.reverse {
+        transform: rotate(-$angle30) skewX($angle30) scaleY(cos($angle30));
+
+        &.inset {
+            transform: rotate(-$angle30) skewX($angle30) scaleY(cos($angle30)) scale(tan($angle30));
+        }
+    }
+
+    &.inset {
+        transform: rotate($angle60) skewX($angle30) scaleY(cos($angle30)) scale(tan($angle30));
+    }
+}
+
+// ok !
+.romb {
+    background-color: teal;
+    width: $side;
+    height: $side * sqrt(3)/2;
+    transform: rotate($angle60)
+                skewX($angle30);
+}
+
+// ok !
+.romb2 {
+    background-color: teal;
+    width: $side;
+    height: $side;
+    transform: rotate($angle60)
+                skewX($angle30)
+                scaleY(cos($angle30));
+}
+
+
+
+// TRIANGLE
+$side: 10em;
+.triangle {
+    overflow: hidden;
+    background: none;
+
+    &:before {
+        display: block;
+        content: '';
+        background-color: teal;
+        width: inherit;
+        height: inherit;
+
+        transform: skewX(-$angle30)
+                    rotate(-$angle60)
+                    translateY(50%);
+    }
+}
+
+.hexa {
+    overflow: hidden;
+    background: none;
+
+    &:before {
+        display: block;
+        content: '';
+        background-color: teal;
+        width: inherit;
+        height: inherit;
+
+        transform: skewX(-$angle30)
+                    rotate(-$angle60);
+    }
+}
+
+.hexa2 {
+    overflow: hidden;
+    background: none;
+
+    &:before {
+        display: block;
+        content: '';
+        background-color: teal;
+        width: inherit;
+        height: inherit;
+
+        transform: scaleY(1/cos($angle30))
+                    skewX(-$angle30)
+                    rotate(-$angle60);
+    }
+}
+
+$cube-colors: '#FF0', '#F00', '#0F0', '#0FF';
+
+.cube {
+    width: $side;
+    height: $side;
+    position: relative;
+    // border: 5px solid pink;
+
+    perspective: 2000px;
+    // transform: rotateY(30deg) rotateX(30deg);
+    transform-style: preserve-3d;
+
+    // animation: spinX 5s alternate infinite;
+
+    .side {
+        width: inherit;
+        height: inherit;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -$side/2;
+        margin-top: -$side/2;
+        border: 1px solid #000;
+
+        // background-color: rgba(10,100,10,0.5);
+    }
+
+    @for $i from 1 through 4 {
+        .side:nth-child(#{$i}) {
+            transform: rotateY(($i - 1) * 90deg)
+                        translateZ($side/2);
+
+            background-color: nth($colors, $i);
+        }
+    }
+
+    .side:nth-child(6) {
+        display: none;
+    }
+
+    .side:nth-child(5),
+    .side:nth-child(6) {
+        display: none;
+    }
+}
+
+
+
+
+@keyframes spinX {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+
+
+
+.rh-h {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border-left: solid 1px;
+  border-bottom: solid 1px;
+
+  margin: -5em;
+  width: 10em;
+  height: 10em;
+
+  transform: skewX(18deg) scaleY(.95);
+  background: rgba(0,10,0,0.5);
+
+  overflow: hidden;
+
+  // &:before {
+  //   display: block;
+  //   content: '';
+
+  //   width: inherit;
+  //   height: inherit;
+
+  //   background: green;
+
+  //   transform: scaleY(1.05)
+  //               skewX(-18deg)
+  //               skewX(-18deg)
+  //               scaleY(.95);
+  // }
+}
+.rh-h:nth-child(2) {
+    // display: none;
+  transform: rotate(144deg)
+    skewX(18deg) scaleY(.95);
+}
+.rh-h:nth-child(3) {
+    // display: none;
+  transform: rotate(288deg)
+    skewX(18deg) scaleY(.95);
+}
+
+
+
+
+
+
+
+.cirlce-holder {
+    min-height: 450px;
+    background: #f3f3f3;
+}
+
+
+$radius1: 70;
+$radius2: 30;
+div[class*="circle"] {
+    border-radius: 50%;
+    border: 1px solid #000;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin: 0;
+
+    // cener of circle
+    &:before {
+        display: block;
+        content: '';
+
+        @include centerItem(2px, 2px);
+
+        border-radius: inherit;
+        background-color: rgba(255,0,0, 1);
+    }
+
+    &:after {
+        display: block;
+        content: '';
+
+        width: 2px;
+        background-color: rgba(0,0,255, 0.8);
+    }
+
+    // first cirle
+    &[class$="r1"] {
+        width: ($radius1 * 2) + px;
+        height: ($radius1 * 2) + px;
+
+        margin-left: (-$radius1 * 2) + px;
+        margin-top: -$radius1 + px;
+        border-color: blue;
+
+        // animation: dynamicCirle 2s linear infinite;
+    }
+
+    // second circle
+    &[class$="r2"] {
+        width: ($radius2 * 2) + px;
+        height: ($radius2 * 2) + px;
+
+        margin-top: (-$radius2) + px;
+
+        border-color: blue;
+
+        // animation: dynamicCirle2 2s linear infinite;
+    }
+
+    &[class$="joining"] {
+        width: ($radius1 + $radius2) + px;
+        height: ($radius1 + $radius2) + px;
+
+        margin-top: -($radius1 + $radius2)/2 + px;
+
+        border: 1px dashed #999;
+
+        // animation: dynamicCirle3 2s linear infinite;
+    }
+
+
+
+    &[class*="inner"],
+    &[class*="outer"] {
+        border: 1px dashed #999;
+    }
+
+    &[class$="inner"] {
+        width: (($radius1 - $radius2) * 2) + px;
+        height: (($radius1 - $radius2) * 2) + px;
+
+        margin-left: -($radius1 - $radius2) + px;
+        margin-top: -($radius1 - $radius2) + px;
+
+        // animation: dynamicCirle4 2s linear infinite;
+    }
+
+    &[class$="outer"] {
+        width: (($radius1 + $radius2) * 2) + px;
+        height: (($radius1 + $radius2) * 2) + px;
+
+        margin-left: -($radius1 + $radius2) + px;
+        margin-top: -($radius1 + $radius2) + px;
+
+        // animation: dynamicCirle5 2s linear infinite;
+    }
+}
+
+div[class$="line"] {
+    height: 2px;
+    background-color: rgba(0,255,100, 0.7);
+    margin-top: -1px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    $centers-line-width: $radius1 + $radius2;
+
+    // $tangent-line-width: 2 * sqrt($radius1 * $radius2); // for tanget circles
+    $tangent-line-width: sqrt( pow($radius1 + $radius2, 2) - pow($radius1 - $radius2, 2) ); // general formular for exterior tangent line
+
+    $inner-radius-line-width: ($radius1 - $radius2);
+
+    // Pitagora generalized
+    // pow($tangent-line-width ,2) = pow($inner-radius-line-widht ,2) + pow($centers-line-width ,2) - (2 * $centers-line-width * $X);
+    $segment-width: (pow($inner-radius-line-width ,2) + pow($centers-line-width ,2) - pow($tangent-line-width ,2)) / (2 * $centers-line-width);
+    $segment-right-width: $centers-line-width - $segment-width;
+
+    // left angle
+    $cos-angle-left: $segment-width / $inner-radius-line-width;
+    $rad-angle-left: acos($cos-angle-left);
+    $angle-left: rad-to-deg($rad-angle-left);
+
+    // right angle
+    $sing-angle-right: $segment-right-width / $tangent-line-width;
+    $rad-angle-right: acos($sing-angle-right);
+    $angle-right: rad-to-deg($rad-angle-right);
+
+    &[class^="centers"] {
+        width: $centers-line-width + px;
+        margin-left: -$radius1 + px;
+    }
+
+
+    &[class^="tangent"] {
+        // display: none;
+        background-color: pink;
+
+        width: $tangent-line-width + px;
+        margin-left: -($tangent-line-width - $radius2) + px;
+
+        transform: rotate($angle-right + deg);
+        transform-origin: right center;
+    }
+
+    &[class^="tangent-bottom"] {
+        transform: rotate(-$angle-right + deg);
+    }
+
+
+    &[class^="innerr"] {
+
+        width: $inner-radius-line-width + px;
+        background-color: red;
+        margin-left: -$radius1 + px;
+
+        transform-origin: left center;
+        transform: rotate(-$angle-left + deg);
+    }
+
+    &[class^="innerr-bottom"] {
+        transform: rotate($angle-left + deg);
+    }
+
+    &[class^="segment"] {
+        background-color: yellow;
+        width: $segment-width + px;
+        margin-left: -$radius1 + px;
+        z-index: 11;
+    }
+
+    &[class^="radius"] {
+        background-color: red;
+        width: $radius1 + px;
+        // margin-left: -$radius1 + px;
+        transform-origin: left center;
+    }
+
+    // $sides-nr: 6;
+    // $rotation-angle: 360deg / $sides-nr;
+
+    // &.rad6 {
+    //     border: 5px solid blue !important;
+    // }
+
+    // @for $i from 1 through $sides-nr {
+    //     .rad6 &:nth-child(#{$i}) {
+    //         transform: rotate($i * $rotation-angle);
+    //         background-color: lighten(red, $i * 7%);
+    //     }
+    // }
+
+
+    @for $j from 1 through 8 {
+        $sides: 3 * $j;
+        $rotation-angle: 360deg / $sides;
+
+        @for $i from 1 through $sides {
+            .rad#{$sides} &:nth-child(#{$i}) {
+                transform: rotate($i * $rotation-angle);
+                background-color: lighten(red, $i * 3%);
+                $delay: $i * 0.2s;
+
+                // animation: hopIn 1s $delay linear;
+            }
+        }
+    }
+
+    $triangle-side-width: $radius1 * sqrt(3);
+    &[class^="triangle"] {
+        width: $triangle-side-width + px;
+        background-color: yellow;
+        margin-left: - ($triangle-side-width - $radius1) + px;
+    }
+
+    &[class*="side1"] {
+        transform-origin: right center;
+        transform: rotate(30deg);
+    }
+
+    &[class*="side2"] {
+        transform-origin: right center;
+        transform: rotate(-30deg);
+    }
+
+    &[class*="side3"] {
+        transform-origin: right center;
+        transform: rotate(-30deg)
+                    translateX(-$triangle-side-width + px)
+                    rotate(120deg);
+        // margin-left: - ($triangle-side-width - $radius1) * 2 + px;
+    }
+
+    &[class^="hexagon"] {
+        width: $radius1 + px;
+        background-color: blue;
+        transform-origin: center center;
+        margin-left: -$radius1/2 + px;
+    }
+
+    @for $i from 1 through 6 {
+        &[class*="hxs#{$i}"] {
+            // transform: rotate(-60deg);
+            $hexagon-outer-radius: sin(60deg) * $radius1;
+            // transform: rotate($i * 60deg);
+            transform: rotate($i * 60deg) translateY($hexagon-outer-radius + px);
+            background-color: lighten(blue, $i * 7%);
+        }
+    }
+
+    // &[class*="hxs1"] {
+    //     transform: rotate(-60deg) ;
+    // }
+
+    // &[class*="hxs2"] {
+    //     transform-origin: right center;
+    //     z-index: 15;
+    //     background-color: yellow;
+    //     transform: rotate(60deg);
+    // }
+
+    // &[class*="hxs3"] {
+    //     background-color: pink;
+    //     transform-origin: center center;
+    //     z-index: 12;
+
+    //     margin-left: -$radius1/2 + px;
+
+    //     $hexagon-outer-radius: sin(60deg) * $radius1;
+    //     // content: '#{$q}';
+
+    //     transform: rotate(60deg) translateY($hexagon-outer-radius + px);
+
+    //     // transform: rotate(-120deg)
+    //     //             translateX($radius1 + px);
+    //                 // rotate(60deg)
+    //                 // translateX(-$radius1 + px)
+    //                 // rotate(60deg);
+    // }
+
+    // &[class*="hxs4"] {
+    //     transform-origin: right center;
+    //     transform: rotate(-60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg);
+    // }
+
+    // &[class*="hxs5"] {
+    //     transform-origin: right center;
+    //     transform: rotate(-60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg);
+    // }
+
+    // &[class*="hxs6"] {
+    //     transform-origin: right center;
+    //     transform: rotate(-60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg)
+    //                 translateX(-$radius1 + px)
+    //                 rotate(60deg);
+    // }
+
+    // $sides18: 18;
+    // $rotation-angle: 360deg / $sides18;
+
+    // @for $i from 1 through $sides18 {
+    //     .rad18 &:nth-child(#{$i}) {
+    //         transform: rotate($i * $rotation-angle);
+    //         background-color: lighten(red, $i * 2%);
+    //     }
+    // }
+
+}
+
+@keyframes hopIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dynamicCirle {
+    0% {
+        width: ($radius1 * 2) + px;
+        height: ($radius1 * 2) + px;
+
+        margin-left: (-$radius1 * 2) + px;
+        margin-top: -$radius1 + px;
+    }
+    50% {
+        $radius1: $radius1 * 1.4;
+        width: ($radius1 * 2) + px;
+        height: ($radius1 * 2) + px;
+
+        margin-left: (-$radius1 * 2) + px;
+        margin-top: -$radius1 + px;
+    }
+    100% {
+        $radius1: $radius1 * 1 / 1.4;
+        width: ($radius1 * 2) + px;
+        height: ($radius1 * 2) + px;
+
+        margin-left: (-$radius1 * 2) + px;
+        margin-top: -$radius1 + px;
+    }
+}
+
+@keyframes dynamicCirle2 {
+    0% {
+        width: ($radius2 * 2) + px;
+        height: ($radius2 * 2) + px;
+
+        margin-top: (-$radius2) + px;
+    }
+    50% {
+        $radius2: $radius2 * 1.1;
+        width: ($radius2 * 2) + px;
+        height: ($radius2 * 2) + px;
+
+        margin-top: (-$radius2) + px;
+    }
+    100% {
+        $radius2: $radius2 * 1 / 1.1;
+        width: ($radius2 * 2) + px;
+        height: ($radius2 * 2) + px;
+
+        margin-top: (-$radius2) + px;
+    }
+}
+
+@keyframes dynamicCirle3 {
+    0% {
+        width: ($radius1 + $radius2) + px;
+        height: ($radius1 + $radius2) + px;
+
+        margin-top: -($radius1 + $radius2)/2 + px;
+    }
+    50% {
+        $radius1: $radius1 * 1.4;
+        $radius2: $radius2 * 1.1;
+
+        width: ($radius1 + $radius2) + px;
+        height: ($radius1 + $radius2) + px;
+
+        margin-top: -($radius1 + $radius2)/2 + px;
+    }
+    100% {
+        $radius1: $radius1 * 1 / 1.4;
+        $radius2: $radius2 * 1 / 1.1;
+
+        width: ($radius1 + $radius2) + px;
+        height: ($radius1 + $radius2) + px;
+
+        margin-top: -($radius1 + $radius2)/2 + px;
+    }
+}
+
+@keyframes dynamicCirle4 {
+    0% {
+        width: (($radius1 - $radius2) * 2) + px;
+        height: (($radius1 - $radius2) * 2) + px;
+
+        margin-left: -($radius1 - $radius2) + px;
+        margin-top: -($radius1 - $radius2) + px;
+    }
+    50% {
+        $radius1: $radius1 * 1.4;
+        $radius2: $radius2 * 1.1;
+
+        width: (($radius1 - $radius2) * 2) + px;
+        height: (($radius1 - $radius2) * 2) + px;
+
+        margin-left: -($radius1 - $radius2) + px;
+        margin-top: -($radius1 - $radius2) + px;
+    }
+    100% {
+        $radius1: $radius1 * 1 / 1.4;
+        $radius2: $radius2 * 1 / 1.1;
+
+        width: (($radius1 - $radius2) * 2) + px;
+        height: (($radius1 - $radius2) * 2) + px;
+
+        margin-left: -($radius1 - $radius2) + px;
+        margin-top: -($radius1 - $radius2) + px;
+    }
+}
+
+@keyframes dynamicCirle5 {
+    0% {
+        width: (($radius1 + $radius2) * 2) + px;
+        height: (($radius1 + $radius2) * 2) + px;
+
+        margin-left: -($radius1 + $radius2) + px;
+        margin-top: -($radius1 + $radius2) + px;
+    }
+    50% {
+        $radius1: $radius1 * 1.4;
+        $radius2: $radius2 * 1.1;
+
+        width: (($radius1 + $radius2) * 2) + px;
+        height: (($radius1 + $radius2) * 2) + px;
+
+        margin-left: -($radius1 + $radius2) + px;
+        margin-top: -($radius1 + $radius2) + px;
+    }
+    100% {
+        $radius1: $radius1 * 1 / 1.4;
+        $radius2: $radius2 * 1 / 1.1;
+
+        width: (($radius1 + $radius2) * 2) + px;
+        height: (($radius1 + $radius2) * 2) + px;
+
+        margin-left: -($radius1 + $radius2) + px;
+        margin-top: -($radius1 + $radius2) + px;
+    }
+}
+
+
+.exp-rad {
+    @for $i from 1 through 6 {
+        div[class*="circle"]:nth-child(#{$i}) {
+            left: ($radius1 * $i * 2) + ($i * 20) + px
+        }
+    }
+
+}

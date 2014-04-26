@@ -9,7 +9,7 @@
 html {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 body {
@@ -65,8 +65,18 @@ $lighten-perc: 20%;
 }
 
 
+.hidden {
+    display: none !important;
+}
+
 /* --------------------- */
 
 @import "modules/piano";
 @import "modules/fog";
 @import "modules/panels";
+@import "modules/piramid";
+
+@import "modules/spiral";
+
+
+@import "modules/geometry";

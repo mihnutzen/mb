@@ -11,6 +11,9 @@
 
         console.log('randomTheme', randomTheme, randomNr);
 
+
+        randomTheme = 'piramid';
+
         $('body').addClass(randomTheme);
 
         if (randomTheme === 'piano-colors') {
@@ -20,6 +23,24 @@
         if (randomTheme === 'panel-letters') {
             initPanels();
         }
+
+        if (randomTheme === 'piramid') {
+            initPiramid();
+        }
+    }
+
+    function initPiramid() {
+        console.log('piramid init! ');
+        var piramidHolder = $('<div class="piramid-holder">'),
+            piramid = $('<span class="piramid">');
+
+        for (var i = 0; i < 4; i++) {
+            piramid.append('<span class="side-'+i+'"></span>');
+        }
+
+        piramidHolder.append(piramid);
+
+        $('.hero-unit').append(piramidHolder);
     }
 
     function initPianoSounds(pianoKey) {

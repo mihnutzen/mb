@@ -172,3 +172,28 @@ $defaultPrefixes: webkit moz ms o;
 	    @content;
 	  }
 }
+
+
+@mixin centerItem($w, $h) {
+    width: $w;
+    height: $h;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    margin-left: -$w/2;
+    margin-top: -$h/2
+}
+
+
+@mixin centerLeft($w, $h) {
+    width: $w;
+    height: $h;
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    margin-top: -$h/2
+}
