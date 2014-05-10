@@ -167,65 +167,6 @@ $side: 10em;
     }
 }
 
-$cube-colors: '#FF0', '#F00', '#0F0', '#0FF';
-
-.cube {
-    width: $side;
-    height: $side;
-    position: relative;
-    // border: 5px solid pink;
-
-    perspective: 2000px;
-    // transform: rotateY(30deg) rotateX(30deg);
-    transform-style: preserve-3d;
-
-    // animation: spinX 5s alternate infinite;
-
-    .side {
-        width: inherit;
-        height: inherit;
-
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -$side/2;
-        margin-top: -$side/2;
-        border: 1px solid #000;
-
-        // background-color: rgba(10,100,10,0.5);
-    }
-
-    @for $i from 1 through 4 {
-        .side:nth-child(#{$i}) {
-            transform: rotateY(($i - 1) * 90deg)
-                        translateZ($side/2);
-
-            background-color: nth($colors, $i);
-        }
-    }
-
-    .side:nth-child(6) {
-        display: none;
-    }
-
-    .side:nth-child(5),
-    .side:nth-child(6) {
-        display: none;
-    }
-}
-
-
-
-
-@keyframes spinX {
-    from {
-        transform: rotateX(0deg) rotateY(0deg);
-    }
-    to {
-        transform: rotateX(360deg) rotateY(360deg);
-    }
-}
-
 
 
 
@@ -284,11 +225,11 @@ $cube-colors: '#FF0', '#F00', '#0F0', '#0FF';
 }
 
 
-$radius1: 70;
-$radius2: 30;
+$radius1: 120;
+$radius2: 60;
 div[class*="circle"] {
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px dashed #666;
 
     position: absolute;
     top: 50%;
@@ -316,25 +257,26 @@ div[class*="circle"] {
     }
 
     // first cirle
-    &[class$="r1"] {
+    &[class*="r1"] {
         width: ($radius1 * 2) + px;
         height: ($radius1 * 2) + px;
 
         margin-left: (-$radius1 * 2) + px;
         margin-top: -$radius1 + px;
-        border-color: blue;
+
+        border-style: solid;
 
         // animation: dynamicCirle 2s linear infinite;
     }
 
     // second circle
-    &[class$="r2"] {
+    &[class*="r2"] {
         width: ($radius2 * 2) + px;
         height: ($radius2 * 2) + px;
 
         margin-top: (-$radius2) + px;
 
-        border-color: blue;
+        border-style: solid;
 
         // animation: dynamicCirle2 2s linear infinite;
     }
@@ -345,16 +287,15 @@ div[class*="circle"] {
 
         margin-top: -($radius1 + $radius2)/2 + px;
 
-        border: 1px dashed #999;
+        border: 1px dashed #333;
 
         // animation: dynamicCirle3 2s linear infinite;
     }
 
 
-
     &[class*="inner"],
     &[class*="outer"] {
-        border: 1px dashed #999;
+        border: 1px dashed #333;
     }
 
     &[class$="inner"] {
@@ -389,12 +330,12 @@ div[class$="line"] {
 
     $centers-line-width: $radius1 + $radius2;
 
-    // $tangent-line-width: 2 * sqrt($radius1 * $radius2); // for tanget circles
-    $tangent-line-width: sqrt( pow($radius1 + $radius2, 2) - pow($radius1 - $radius2, 2) ); // general formular for exterior tangent line
+    // $tangent-line-width: 2 * sqrt($radius1 * $radius2); // tanget circles
+    $tangent-line-width: sqrt( pow($radius1 + $radius2, 2) - pow($radius1 - $radius2, 2) ); // exterior tangent line
 
     $inner-radius-line-width: ($radius1 - $radius2);
 
-    // Pitagora generalized
+    // Pitagora
     // pow($tangent-line-width ,2) = pow($inner-radius-line-widht ,2) + pow($centers-line-width ,2) - (2 * $centers-line-width * $X);
     $segment-width: (pow($inner-radius-line-width ,2) + pow($centers-line-width ,2) - pow($tangent-line-width ,2)) / (2 * $centers-line-width);
     $segment-right-width: $centers-line-width - $segment-width;
@@ -481,55 +422,53 @@ div[class$="line"] {
         @for $i from 1 through $sides {
             .rad#{$sides} &:nth-child(#{$i}) {
                 transform: rotate($i * $rotation-angle);
-                background-color: lighten(red, $i * 3%);
-                $delay: $i * 0.2s;
+                // background-color: lighten(red, $i * 3%);
 
-                // animation: hopIn 1s $delay linear;
             }
         }
     }
 
-    $triangle-side-width: $radius1 * sqrt(3);
-    &[class^="triangle"] {
-        width: $triangle-side-width + px;
-        background-color: yellow;
-        margin-left: - ($triangle-side-width - $radius1) + px;
-    }
+    // $triangle-side-width: $radius1 * sqrt(3);
+    // &[class^="triangle"] {
+    //     width: $triangle-side-width + px;
+    //     background-color: yellow;
+    //     margin-left: - ($triangle-side-width - $radius1) + px;
+    // }
 
-    &[class*="side1"] {
-        transform-origin: right center;
-        transform: rotate(30deg);
-    }
+    // &[class*="side1"] {
+    //     transform-origin: right center;
+    //     transform: rotate(30deg);
+    // }
 
-    &[class*="side2"] {
-        transform-origin: right center;
-        transform: rotate(-30deg);
-    }
+    // &[class*="side2"] {
+    //     transform-origin: right center;
+    //     transform: rotate(-30deg);
+    // }
 
-    &[class*="side3"] {
-        transform-origin: right center;
-        transform: rotate(-30deg)
-                    translateX(-$triangle-side-width + px)
-                    rotate(120deg);
-        // margin-left: - ($triangle-side-width - $radius1) * 2 + px;
-    }
+    // &[class*="side3"] {
+    //     transform-origin: right center;
+    //     transform: rotate(-30deg)
+    //                 translateX(-$triangle-side-width + px)
+    //                 rotate(120deg);
+    //     // margin-left: - ($triangle-side-width - $radius1) * 2 + px;
+    // }
 
-    &[class^="hexagon"] {
-        width: $radius1 + px;
-        background-color: blue;
-        transform-origin: center center;
-        margin-left: -$radius1/2 + px;
-    }
+    // &[class^="hexagon"] {
+    //     width: $radius1 + px;
+    //     background-color: blue;
+    //     transform-origin: center center;
+    //     margin-left: -$radius1/2 + px;
+    // }
 
-    @for $i from 1 through 6 {
-        &[class*="hxs#{$i}"] {
-            // transform: rotate(-60deg);
-            $hexagon-outer-radius: sin(60deg) * $radius1;
-            // transform: rotate($i * 60deg);
-            transform: rotate($i * 60deg) translateY($hexagon-outer-radius + px);
-            background-color: lighten(blue, $i * 7%);
-        }
-    }
+    // @for $i from 1 through 6 {
+    //     &[class*="hxs#{$i}"] {
+    //         // transform: rotate(-60deg);
+    //         $hexagon-outer-radius: sin(60deg) * $radius1;
+    //         // transform: rotate($i * 60deg);
+    //         transform: rotate($i * 60deg) translateY($hexagon-outer-radius + px);
+    //         background-color: lighten(blue, $i * 7%);
+    //     }
+    // }
 
     // &[class*="hxs1"] {
     //     transform: rotate(-60deg) ;
@@ -611,6 +550,33 @@ div[class$="line"] {
     // }
 
 }
+
+
+
+
+@for $y from 3 through 6 {
+
+    $sides-nr: $y;
+    $side-width: 140px;
+
+    $distance: $side-width / (2 * tan( pi() / $sides-nr));
+    $angle: 360deg / $sides-nr;
+
+    @for $x from 1 through $sides-nr {
+        .sides#{$sides-nr}:nth-child(#{$x}) {
+            transform: rotate($angle * $x) translateY($distance) !important;
+        }
+    }
+}
+
+
+$side-width: 140px;
+.poligon div {
+    width: $side-width;
+    background-color: green;
+}
+
+
 
 @keyframes hopIn {
     from {

@@ -174,7 +174,7 @@ $defaultPrefixes: webkit moz ms o;
 }
 
 
-@mixin centerItem($w, $h) {
+@mixin centerItem($w, $h: $w) {
     width: $w;
     height: $h;
 
@@ -187,7 +187,7 @@ $defaultPrefixes: webkit moz ms o;
 }
 
 
-@mixin centerLeft($w, $h) {
+@mixin centerLeft($w, $h: $w) {
     width: $w;
     height: $h;
 

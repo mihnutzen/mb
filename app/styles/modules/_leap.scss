@@ -1,0 +1,226 @@
+.leap-demo {
+    border: 0;
+
+    *,*:before,*:after {
+        box-sizing: border-box;
+        transform-style: preserve-3d;
+    }
+
+
+    #app {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        // font-size: 200%;
+        overflow: hidden;
+        background-color: #101010;
+        perspective: 1000px;
+    }
+
+    $scene-size: 1200px;
+    #scene,
+    #scene:before {
+        @include centerItem($scene-size);
+
+        border: 4px solid #A0A0A0;
+
+        background-color: #eee;
+        background-image: linear-gradient(45deg, #fefefe 25%, transparent 25%, transparent 75%, #fefefe 75%, #fefefe),
+        linear-gradient(45deg, #fefefe 25%, transparent 25%, transparent 75%, #fefefe 75%, #fefefe);
+        background-size:60px 60px;
+        background-position:0 0, 30px 30px;
+
+        transform-style: preserve-3d;
+    }
+    #scene {
+        transform: rotateX(75deg);
+    }
+    #scene:before {
+        content: '';
+        transform: rotateX(90deg) translateZ($scene-size/2) translateY($scene-size/2);
+    }
+
+    // Minial setup for creating a cube
+    $cube-side: 100px;
+    .cube,
+    .cube-half {
+        @include centerItem($cube-side);
+
+        border: 2px solid #eee;
+
+        &:before,
+        &:after {
+            display: block;
+            content: '';
+
+            @include centerItem($cube-side);
+
+            background-color: transparentize(#666, 0.8);
+            border: 2px solid #eee;
+        }
+
+        &:before {
+            transform-origin: left;
+            transform: rotateY(-90deg);
+        }
+
+        &:after {
+            transform-origin: top;
+            transform: rotateX(90deg);
+        }
+        background-color: transparentize(#666, 0.8);
+    }
+
+    .cube-half {
+        transform: translateZ($cube-side) rotate(-90deg) rotateX(180deg);
+    }
+    // End Cube setup
+
+    .cube {
+        // display: none;
+    }
+
+
+
+    $finger-width: 100px;
+    $finger-height: 30px;
+    .finger-half,
+    .finger {
+        // transform: translateY(400px) rotate(-40deg);
+        display: none;
+        @include centerItem($finger-width, $finger-height);
+
+        &:after {
+            @include centerItem($finger-width, $finger-height);
+        }
+
+        &:before {
+            @include centerItem($finger-height, $finger-height);
+            transform: rotateY(-90deg) translateZ(($finger-width - $finger-height) / 2);
+        }
+    }
+    .finger-half {
+        display: inherit;
+        transform: translateZ($finger-height) rotate(180deg) rotateX(180deg);
+        &:after {
+            transform-origin: bottom;
+            transform: rotateX(-90deg);
+        }
+    }
+
+
+    $palm-width: 130px;
+    $palm-height: 80px;
+    .palm-half,
+    .palm {
+        // transform: translateY(400px) rotate(-40deg);
+        display: none;
+        @include centerItem($palm-width, $palm-height);
+
+        &:after {
+            @include centerItem($palm-width, $palm-height);
+        }
+
+        &:before {
+            @include centerItem($palm-height, $palm-height);
+            transform: rotateY(-90deg) translateZ(($palm-width - $palm-height) / 2);
+        }
+    }
+    .palm-half {
+        display: inherit;
+        transform: translateZ($palm-height) rotate(180deg) rotateX(180deg);
+        &:after {
+            transform-origin: bottom;
+            transform: rotateX(-90deg);
+        }
+    }
+
+
+    .rotatable-cube {
+
+        // animation: animStep1 2s ease-in;
+        // animation-name: animStep1, animStep2;
+        animation-duration: 2s;
+        animation-delay: 0s;
+        animation-fill-mode: forwards;
+
+        &, &:before, &:after, .cube-half, .cube-half:before, .cube-half:after {
+            background-color: transparentize(red, 0.8);
+        }
+
+        transform-origin: bottom right;
+    }
+
+    .rotatable-holder {
+        border: 0;
+        padding: 0;
+        @include centerItem($cube-side);
+    }
+
+    .step1 {
+        .rotatable-cube {
+            animation-name: animStep1;
+        }
+
+    }
+
+    .step2 {
+        animation: animStep2 2s 0s linear forwards;
+    }
+
+    .step3 {
+        animation: spinCube 2s 0s linear infinite;
+    }
+}
+
+.spin-x {
+    // background-color: yellow;
+    @include centerItem($cube-side * 3);
+    // transform: rotate(90deg);
+    // animation: spinCube 2s 0s linear infinite;
+}
+
+.rotatable-holder {
+    // transform-origin: right bottom;
+    // transform: translateX(-$cube-side/2) rotateY(45deg);
+}
+
+.rotatable-cube {
+    // transform-origin: bottom right !important;
+    // transform: translateY(-$cube-side/2) rotateX(-45deg);
+}
+
+
+@keyframes animStep1 {
+    0% {
+        transform-origin: bottom right;
+        transform: translateY(-$cube-side/2) rotateX(0deg);
+    }
+    100% {
+        transform-origin: bottom right;
+        transform: translateY(-$cube-side/2) rotateX(-45deg);
+    }
+}
+
+@keyframes animStep2 {
+    0% {
+        transform-origin: right bottom;
+        transform: translateX(-$cube-side/2) rotateY(0deg);
+    }
+    100% {
+        transform-origin: right bottom;
+        transform: translateX(-$cube-side/2) rotateY(45deg);
+    }
+}
+
+
+@keyframes spinCube {
+    0% {
+        // transform-origin: right;
+        transform: rotate(0deg);
+    }
+    100% {
+        // transform-origin: right;
+        transform: rotate(360deg);
+    }
+}

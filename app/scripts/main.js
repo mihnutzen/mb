@@ -1,3 +1,4 @@
+/* global Leap */
 (function($){
     'use strict';
 
@@ -27,6 +28,8 @@
         if (randomTheme === 'piramid') {
             initPiramid();
         }
+
+        initLeap();
     }
 
     function initPiramid() {
@@ -40,7 +43,7 @@
 
         piramidHolder.append(piramid);
 
-        $('.hero-unit').append(piramidHolder);
+        // $('.hero-unit').append(piramidHolder);
     }
 
     function initPianoSounds(pianoKey) {
@@ -115,6 +118,151 @@
 
     function centerPointCoords(posLeft, posTop, itemWidth,  itemHeight) {
         return { 'left' : posLeft + itemWidth/2, 'top' : posTop + itemHeight/2 };
+    }
+
+
+
+    function initLeap() {
+        function moveFinger(Finger, posX, posY, posZ, dirX, dirY, dirZ) {
+            Finger.style.webkitTransform =
+            Finger.style.mozTransform =
+            Finger.style.transform = 'translateX('+posX+'px)'+
+                                    'translateY('+posY+'px)'+
+                                    'translateZ('+posZ+'px)'+
+                                    'rotateX('+dirX+'deg)'+
+                                    'rotateY('+dirY+'deg)'+
+                                    'rotateZ('+dirZ+'deg)'+
+                                    'rotate(90deg) ';
+            Finger.style.display = 'block';
+        }
+
+        function movePalm(Palm, posX, posY, posZ, rotX, rotY, rotZ) {
+            Palm.style.webkitTransform =
+            Palm.style.mozTransform =
+            Palm.style.transform = 'translateX('+posX+'px)'+
+                                    'translateY('+posY+'px)'+
+                                    'translateZ('+posZ+'px)'+
+                                    'rotateX('+rotX+'deg)'+
+                                    'rotateY('+rotY+'deg)'+
+                                    'rotateZ('+rotZ+'deg)'+
+                                    'rotateY(90deg) rotate(45deg) translateX(50px)';
+            Palm.style.display = 'block';
+        }
+
+        var fingers = {},
+            palms = {};
+
+        var animTriggerCounter = 0;
+        Leap.loop(function(frame) {
+            var fingerIds = {},
+                handIds = {},
+                handsLength;
+
+            if (frame.hands === undefined ) {
+                handsLength = 0;
+            } else {
+                handsLength = frame.hands.length;
+            }
+
+            for (var handId = 0, handCount = handsLength; handId !== handCount; handId++) {
+                var hand = frame.hands[handId];
+                var posX = (hand.palmPosition[0]*3);
+                var posY = (hand.palmPosition[2]*3)-200;
+                var posZ = (hand.palmPosition[1]*3)-400;
+                var rotX = (hand._rotation[2]*90);
+                var rotY = (hand._rotation[1]*90);
+                var rotZ = (hand._rotation[0]*90);
+                var palm = palms[hand.id];
+
+                console.log(posZ);
+
+                if (posZ < 150) {
+                    animTriggerCounter++;
+
+                    if (animTriggerCounter === 30) {
+                        $('.rotatable-holder').addClass('step1');
+                    }
+
+                    if (animTriggerCounter === 60) {
+                        $('.rotatable-holder').addClass('step2');
+                    }
+
+                    if (animTriggerCounter === 100) {
+                        $('.spin-x').addClass('step3');
+                    }
+
+                }
+
+                var palmDiv;
+
+                if (!palm) {
+                    palmDiv = document.getElementById('palm').cloneNode(true);
+                    palmDiv.setAttribute('id',hand.id);
+                    // palmDiv.style.backgroundColor='#'+Math.floor(Math.random()*16777215).toString(16);
+                    document.getElementById('scene').appendChild(palmDiv);
+                    palms[hand.id] = hand.id;
+
+                } else {
+                    palmDiv =  document.getElementById(hand.id);
+
+                    if (typeof(palmDiv) !== 'undefined' && palmDiv !== null) {
+                        movePalm(palmDiv, posX, posY, posZ, rotX, rotY, rotZ);
+                    }
+                }
+
+                handIds[hand.id] = true;
+            }
+
+            for (handId in palms) {
+                if (!handIds[handId]) {
+                    var palmsDiv =  document.getElementById(palms[handId]);
+
+                    palmsDiv.parentNode.removeChild(palmsDiv);
+
+                    delete palms[handId];
+                }
+            }
+
+            for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId !== pointableCount; pointableId++) {
+                var pointable = frame.pointables[pointableId];
+                var pointablePosX = (pointable.tipPosition[0]*3);
+                var pointablePosY = (pointable.tipPosition[2]*3)-200;
+                var pointablePosZ = (pointable.tipPosition[1]*3)-400;
+                var pointableDirX = -(pointable.direction[1]*90);
+                var pointableDirY = -(pointable.direction[2]*90);
+                var pointableDirZ = (pointable.direction[0]*90);
+                var finger = fingers[pointable.id];
+
+                var fingerDiv;
+                if (!finger) {
+                    fingerDiv = document.getElementById('finger').cloneNode(true);
+                    fingerDiv.setAttribute('id',pointable.id);
+
+                    // fingerDiv.style.backgroundColor='#'+Math.floor(Math.random()*16777215).toString(16);
+
+                    document.getElementById('scene').appendChild(fingerDiv);
+                    fingers[pointable.id] = pointable.id;
+                } else {
+                    fingerDiv =  document.getElementById(pointable.id);
+
+                    if (typeof(fingerDiv) !== 'undefined' && fingerDiv !== null) {
+                        moveFinger(fingerDiv, pointablePosX, pointablePosY, pointablePosZ, pointableDirX, pointableDirY, pointableDirZ);
+                    }
+                }
+
+                fingerIds[pointable.id] = true;
+            }
+
+            for (var fingerId in fingers) {
+                if (!fingerIds[fingerId]) {
+                    var fingersDiv =  document.getElementById(fingers[fingerId]);
+                    fingersDiv.parentNode.removeChild(fingersDiv);
+                    delete fingers[fingerId];
+                }
+            }
+
+        });
+
     }
 
     initTheme();
