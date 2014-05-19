@@ -18,8 +18,8 @@
     .main-title {
         @for $i from 1 through 13 {
             span[class^="char"]:nth-child(#{$i}) {
-                animation: clearLetter (usw_random() + 1s) ease-in forwards ($i * 0.1s + (usw_random() + 0.5s));
-                -webkit-animation: clearLetter (usw_random() + 1s) ease-in forwards ($i * 0.1s + (usw_random() + 0.5s));
+                animation: clearLetter (random() * 0.01s) ease-in forwards (random() * 0.01s + 3s);
+                -webkit-animation: clearLetter (random() * 0.01s) ease-in forwards (random() * 0.01s + 3s);
             }
 
         }
@@ -28,8 +28,8 @@
     .job-title {
         @for $i from 1 through 9 {
             span[class^="char"]:nth-child(#{$i}) {
-                animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 2.5s);
-                -webkit-animation: fitLetter (usw_random() + usw_random() + 0.2s) ease-in forwards (usw_random() + 7.5s);
+                animation: fitLetter (random() * 0.01s) ease-in forwards (random() * 0.01s + 5s);
+                -webkit-animation: fitLetter (random() * 0.01s) ease-in forwards (random() * 0.01s + 5s);
             }
 
         }

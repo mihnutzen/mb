@@ -6,14 +6,14 @@
     $('.job-title strong').lettering();
 
     function initTheme() {
-        var themes = ['piano-colors', 'fog-letters', 'panel-letters'],
+        var themes = ['piano-colors', 'fog-letters', 'panel-letters', 'rotating-circles', 'circle-axis'],
             randomNr = Math.floor(Math.random() * themes.length),
             randomTheme = themes[randomNr];
 
         console.log('randomTheme', randomTheme, randomNr);
 
 
-        randomTheme = 'piramid';
+        // randomTheme = 'rotating-circles';
 
         $('body').addClass(randomTheme);
 
@@ -29,7 +29,15 @@
             initPiramid();
         }
 
+        if (randomTheme === 'rotating-circles') {
+            initCircles();
+        }
+
         initLeap();
+    }
+
+    function initCircles() {
+        $('.hero-unit').append('<div class="rotating-circles-holder"><div class="circle lvl1"><div class="circle lvl2"><div class="circle lvl3"><div class="circle lvl4"><div class="circle lvl5"><div class="circle lvl6"><div class="circle lvl7"><div class="circle lvl8"><div class="circle lvl9"><div class="circle lvl10"><div class="circle lvl11"><div class="circle lvl12"><div class="circle lvl13"><div class="circle lvl14"><div class="circle lvl15"><div class="circle lvl16"><div class="circle lvl17"><div class="circle lvl18"><div class="circle lvl19"><div class="circle lvl20"></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>');
     }
 
     function initPiramid() {

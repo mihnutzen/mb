@@ -1,0 +1,205 @@
+
+$c-radius: 130px;
+$c-anim-time: 1s;
+.circle-axis {
+
+    background-color: #CCC;
+
+    .hero-unit .job-title {
+        font-size: 48px;
+        line-height: 48px;
+        width: 100%;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    .mailme {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin: 10px 0;
+    }
+
+    *, *:after, *:before {
+        box-sizing: border-box;
+    }
+
+    .axis-x {
+        width: $c-radius * 2;
+        height: 2px;
+
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -1px;
+        background-color: #fff;
+    }
+
+    .axis-y {
+        height: $c-radius * 2;
+        width: 2px;
+
+        position: absolute;
+        left: 50%;
+        top: 0;
+        margin-left: -1px;
+        background-color: #fff;
+    }
+
+    .axis-circle-holder {
+        @include centerItem($c-radius * 2);
+        // background-color: teal;
+    }
+
+    .big-circle {
+        @include centerItem($c-radius * 2);
+        border-radius: 50%;
+        border: 2px solid #000;
+
+        animation: rotateC $c-anim-time * 2 linear infinite;
+    }
+
+    .small-circle {
+        @include centerLeft($c-radius);
+        border-radius: 50%;
+        border: 2px solid #FFF;
+
+        animation: rotateC $c-anim-time linear infinite reverse;
+
+
+        .dot {
+            display: block;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+            border: 2px solid #fff;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .dot:nth-child(1) {
+            left: -$c-radius/2;
+            margin-top: -5px;
+            margin-left: -5px;
+        }
+
+        .dot:nth-child(2) {
+            left: auto;
+            right: -$c-radius/2;
+            margin-top: -5px;
+            margin-right: -9px;
+        }
+
+        .dot:nth-child(3) {
+            top: -$c-radius/2;
+            margin-left: -5px;
+            margin-top: -5px;
+        }
+
+        .dot:nth-child(4) {
+            top: auto;
+            bottom: -$c-radius/2;
+            margin-left: -5px;
+            margin-bottom: -9px;
+        }
+
+        &.centered {
+            left: 50%;
+            margin-left: -$c-radius/2;
+            border-color: #666;
+        }
+
+        .axis-x {
+            margin-left: -$c-radius/2;
+
+            &:before {
+                display: block;
+                content: '';
+
+                width: 10px;
+                height: 10px;
+
+                border-radius: 50%;
+                border: 2px solid #fff;
+
+                position: absolute;
+                left: $c-radius/2;
+                margin-left: -6px;
+                top: 50%;
+                margin-top: -5px;
+            }
+
+            &:after {
+                display: block;
+                content: '';
+
+                width: 10px;
+                height: 10px;
+
+                border-radius: 50%;
+                border: 2px solid #fff;
+
+                position: absolute;
+                right: $c-radius/2;
+                top: 50%;
+                margin-top: -5px;
+                margin-right: -2px;
+            }
+        }
+
+        .axis-y {
+            margin-top: -$c-radius/2;
+
+            &:before {
+                display: block;
+                content: '';
+
+                width: 10px;
+                height: 10px;
+
+                border-radius: 50%;
+                border: 2px solid #FFF;
+
+                position: absolute;
+                left: 50%;
+                margin-left: -5px;
+                top: 50%;
+                margin-top: -7px;
+            }
+        }
+    }
+
+
+    .elipse {
+        @include centerItem($c-radius * 3,$c-radius);
+        border: 2px solid #999;
+        border-radius: 50%;
+    }
+
+    .elipse + .elipse {
+        transform: rotate(90deg);
+    }
+
+    .elipse + .elipse + .elipse {
+        transform: rotate(45deg);
+    }
+
+    .elipse + .elipse + .elipse + .elipse {
+        transform: rotate(-45deg);
+    }
+}
+
+
+@keyframes rotateC {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

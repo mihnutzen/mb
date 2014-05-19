@@ -1,25 +1,31 @@
+$spacing: 20px;
+
 $color-bg: #79BEDB;
 $color-text: #fff;
 $color-panels: lighten(#ffc148, 0%);
 
 .panel-letters {
     background-color: darken($color-bg, 30%);
-    // animation: changeColors 10s linear infinite;
+
+
+    *, *:before, *:after {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
 
     .job-title {
         .letter-holder {
             perspective: 2000px;
-            height: $spacing*2.5 + 4px;
+            height: $spacing*5;
             padding: $spacing*0.75;
             overflow: hidden;
         }
-
 
         .letter {
             position: relative;
             z-index: 1;
 
-            height: inherit;
+            height: $spacing * 3 + 4px; // 4 from border
 
             transform-style: preserve-3d;
             transform: rotateY(45deg) rotateX(45deg);
@@ -31,14 +37,14 @@ $color-panels: lighten(#ffc148, 0%);
 
 
             // transition: all 1s linear;
-            animation: spin 2s linear;
+            animation: spinLetter 2s linear;
 
             span[class^="char"] {
                 font-size: $spacing*1.5;
-                line-height: $spacing*2.5;
+                line-height: $spacing*3;
                 vertical-align: top;
 
-                width: $spacing*2;
+                width: $spacing*3;
 
                 overflow: hidden;
                 position: relative;
@@ -124,26 +130,12 @@ $color-panels: lighten(#ffc148, 0%);
 
 }
 
-@keyframes changeColors {
-    @for $i from 1 through 10 {
-        $perc: $i * 10%;
-        #{$perc} {
-            @if $i < 5 {
-                background-color: darken($color-bg, $perc);
-            } else {
-                background-color: lighten($color-bg, 10% * (10 - $i));
-            }
-
-        }
-    }
-}
-
-
-@keyframes spin {
-    from {
+@keyframes spinLetter {
+    0% {
         transform: rotateY(-45deg) rotateX(-45deg);
     }
-    to {
+
+    100% {
         transform: rotateY(45deg) rotateX(45deg);
     }
 }

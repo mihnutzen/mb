@@ -1,0 +1,66 @@
+$circle-r: 15px;
+$circle-anim-time: 15s;
+
+.rotating-circles {
+    .hero-unit .job-title {
+        font-size: 48px;
+        line-height: 48px;
+        width: 100%;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    .mailme {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin: 10px 0;
+    }
+}
+
+.rotating-circles-holder {
+    @include centerItem($circle-r * 20);
+
+    overflow: hidden;
+
+    // background-color: pink;
+
+
+    .lvl1 {
+        // animation: spinCricle $circle-anim-time linear infinite;
+    }
+
+    .circle {
+        animation: spinCricle $circle-anim-time linear infinite;
+    }
+
+    .circle {
+        @include centerLeft($circle-r*7);
+
+        border-radius: 50%;
+        // border: 35px solid #000 !important;
+        background-color: #FFF;
+    }
+
+
+    @for $i from 1 through 20 {
+        .lvl#{$i} {
+            @include centerLeft($circle-r * (21 - $i));
+
+            @if $i % 2 == 0 {
+                background-color: #000;
+            }
+        }
+    }
+}
+
+
+@keyframes spinCricle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

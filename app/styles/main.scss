@@ -74,13 +74,20 @@ $lighten-perc: 20%;
 @import "modules/piano";
 @import "modules/fog";
 @import "modules/panels";
-@import "modules/piramid";
 
-@import "modules/spiral";
+@import "modules/rotating-circles";
 
-
-@import "modules/geometry";
+@import "modules/circle-axis";
 
 
-@import "modules/cube";
-@import "modules/leap";
+// @import "modules/piramid";
+
+// @import "modules/spiral";
+
+
+// @import "modules/geometry";
+
+
+// @import "modules/cube";
+// @import "modules/leap";
+
